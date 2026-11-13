@@ -1,4 +1,4 @@
-# 1 SET SSH ON LOCAL MACHINE   
+# 1 SET SSH ON LOCAL MACHINE TO EASILY CONNECT WITH YOUR RASPBERRY PI 
 ```
 ssh-keygen -t rsa # ~/.ssh/pi_key
 
@@ -8,6 +8,41 @@ Host pi5
     IdentityFile ~/.ssh/pi_key
     IdentitiesOnly yes
 
+```
+
+# 2 SET STATIC IP ON YOUR RASPBERRY PI TO SURVIVE RESTARTS  
+```
+sudo grep -l wlan0 /etc/netplan/*.yaml
+vim /etc/netplan/wlan_config.yaml
+```
+```
+network:
+  version: 2
+  wifis:
+    wlan0:
+      renderer: NetworkManager
+      match: {}
+      dhcp4: false
+      addresses:
+        - 192.168.100.41/24
+      routes:
+        - to: default
+          via: 192.168.100.1
+      nameservers:
+        addresses: [1.1.1.1, 9.9.9.9]
+      access-points:
+        "<ACCESS_POINT>":
+          auth:
+            key-management: "psk"
+            password: "<PASTE HERE PASSWORD>"
+          networkmanager:
+            uuid: "<UUID>"
+            name: "<NETWORK_NAME>"
+            passthrough:
+              proxy._: ""
+      networkmanager:
+        uuid: "<UUID>"
+        name: "<NETWORK_NAME>"
 ```
 
 # 2 SET SSH CONFIG ON RASPBERRY
