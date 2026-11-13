@@ -13,7 +13,12 @@ mise use -g uv@latest
 
 # APT INSTALLATIONS  
 ```
-sudo apt update && sudo apt install -y vim
+sudo apt update && sudo apt install -y vim git
+
+git config --global user.name "Kuba"
+git config --global user.email "jakub.g26101991@gmail.com"
+git config --global init.defaultBranch main
+git config --global core.editor vim
 ```
 
 
