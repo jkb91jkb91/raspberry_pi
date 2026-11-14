@@ -99,6 +99,12 @@ mise use -g python@3.12
 mise use -g uv@latest
 ```
 
+# DOCKER AND DOCKER-COMPOSE  
+```
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+```
+
 # TAILSCALE: VPN
 ```
 curl -fsSL https://tailscale.com/install.sh | sh
