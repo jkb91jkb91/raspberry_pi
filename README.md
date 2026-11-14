@@ -99,6 +99,12 @@ mise use -g python@3.12
 mise use -g uv@latest
 ```
 
+# TAILSCALE: VPN
+```
+curl -fsSL https://tailscale.com/install.sh | sh
+sudo systemctl status tailscaled
+```
+
 # APT INSTALLATIONS  
 ```
 sudo apt update && sudo apt install -y vim git
