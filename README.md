@@ -1,4 +1,4 @@
-# 1 SET SSH ON LOCAL MACHINE TO EASILY CONNECT WITH YOUR RASPBERRY PI 
+# SET SSH ON LOCAL MACHINE TO EASILY CONNECT WITH YOUR RASPBERRY PI 
 ```
 ssh-keygen -t rsa # ~/.ssh/pi_key
 
@@ -10,7 +10,40 @@ Host pi5
 
 ```
 
-# 2 SET STATIC IP ON YOUR RASPBERRY PI TO SURVIVE RESTARTS  
+# MOUNT MICRO SD CARD UNDER /mnt/lfs
+
+Check parition name  >>> mmcblk0p2  
+```
+jkb91@pi5:~ $ lsblk
+NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+loop0         7:0    0     2G  0 loop 
+sda           8:0    0 465.8G  0 disk 
+├─sda1        8:1    0   512M  0 part /boot/firmware
+└─sda2        8:2    0 465.3G  0 part /
+mmcblk0     179:0    0  29.2G  0 disk 
+├─mmcblk0p1 179:1    0   512M  0 part 
+└─mmcblk0p2 179:2    0  28.6G  0 part 
+zram0       254:0    0     2G  0 disk [SWAP]
+
+```
+Get UUID  
+```
+sudo blkid /dev/mmcblk0p2
+/dev/mmcblk0p2: LABEL="rootfs" UUID="ac84b5c1-45ac-45c5-b776-ab9fef102c50" BLOCK_SIZE="4096" TYPE="ext4" PARTUUID="463150a0-02"
+
+```
+Append such entry with UUID included into /etc/fstab  
+```
+jkb91@pi5:~ $ cat /etc/fstab 
+UUID=ac84b5c1-45ac-45c5-b776-ab9fef102c50  /mnt/lfs  ext4  defaults,nofail  0  2
+```
+Restart and check  
+```
+sudo reboot
+```
+
+
+# SET STATIC IP ON YOUR RASPBERRY PI TO SURVIVE RESTARTS  
 ```
 sudo grep -l wlan0 /etc/netplan/*.yaml
 vim /etc/netplan/wlan_config.yaml
@@ -45,7 +78,7 @@ network:
         name: "<NETWORK_NAME>"
 ```
 
-# 2 SET SSH CONFIG ON RASPBERRY
+# SET SSH CONFIG ON RASPBERRY
 ```
 Host github.com
     HostName github.com
@@ -54,7 +87,7 @@ Host github.com
     IdentitiesOnly yes
 ```
 
-# 3 MISE  
+# MISE  
 ```
 curl https://mise.jdx.dev/install.sh | sh
 echo 'eval "$(mise activate bash)"' >> ~/.bashrc
@@ -66,7 +99,7 @@ mise use -g python@3.12
 mise use -g uv@latest
 ```
 
-# 4 APT INSTALLATIONS  
+# APT INSTALLATIONS  
 ```
 sudo apt update && sudo apt install -y vim git
 
