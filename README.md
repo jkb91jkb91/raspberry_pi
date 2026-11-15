@@ -116,6 +116,7 @@ sudo chown -R jkb91:jellyfin /srv/media
 ```
 bash bootsrap.sh
 ```
+visit: 192.168.100.41:8080  with the password generated in bootstrap.sh  
 
 # TAILSCALE: VPN
 ```
