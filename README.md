@@ -105,6 +105,18 @@ curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 ```
 
+# JELLYFIN
+```
+curl -s https://repo.jellyfin.org/install-debuntu.sh | sudo bash
+systemctl status jellyfin
+sudo chown -R jkb91:jellyfin /srv/media
+```
+
+# TORRENT  
+```
+bash bootsrap.sh
+```
+
 # TAILSCALE: VPN
 ```
 curl -fsSL https://tailscale.com/install.sh | sh
